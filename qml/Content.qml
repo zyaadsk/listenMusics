@@ -81,8 +81,8 @@ Rectangle {
             TapHandler {
                 onTapped: {
                     mediaplayer.stop() //将上一首歌曲结束
-                    mediaplayer.source = media //将资源导入md
-                    mediaplayer.play() //md进行播放的实现
+                    mediaplayer.source = media //将资源导入mediaplayer
+                    mediaplayer.play() //mediaplayer进行播放的实现
                 }
             }
         }

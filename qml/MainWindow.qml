@@ -48,10 +48,12 @@ ApplicationWindow {
         id: actions
         openFileAction.onTriggered: dialogs.openFileDialog()
         aboutAction.onTriggered: dialogs.openaboutDialog()
-        playAction.onTriggered: if (playAction.icon.source == "/resource/image/播放.png")
-                                    content.pauseMedia()
-                                else
-                                    content.playMedia()
+        playAction.onTriggered: {
+            if (playAction.icon.source == "/resource/image/播放.png")
+                content.pauseMedia()
+            else
+                content.playMedia()
+        }
         nextAction.onTriggered: content.nextMedia()
         lastAction.onTriggered: content.lastMedia()
     }
