@@ -11,6 +11,7 @@ Item {
     Action {
         id: search
         text: qsTr("搜索歌曲")
+        icon.source: "/resource/image/查找.png"
     }
     Action {
         id: next

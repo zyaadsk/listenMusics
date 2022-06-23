@@ -8,10 +8,19 @@
 #include <QNetworkRequest>
 
 KuGou::KuGou(QObject *parent) : QObject(parent) {
+  qDebug() << "kugou";
   network_manager = new QNetworkAccessManager();
   network_request = new QNetworkRequest();
   network_manager2 = new QNetworkAccessManager();
   network_request2 = new QNetworkRequest();
+
+  //这句话很重要，我们手动复制url放到浏览器可以获取json，但是通过代码不行，必须加上下面这句才可以
+  //设置头部headerName的值为headerValue
+  network_request2->setRawHeader("Cookie", "kg_mid=2333");
+  //将已知报头的值设置为value，覆盖之前设置的任何报头。此操作还设置了等价的原始HTTP报头。
+  network_request2->setHeader(QNetworkRequest::CookieHeader, 2333);
+
+  //每当等待的网络应答完成时，就会发出这个信号。reply参数将包含一个指向刚刚完成的应答的指针。这个信号与QNetworkReply::finished()信号一起发出
   connect(network_manager, &QNetworkAccessManager::finished, this,
           &KuGou::replyFinished);
   connect(network_manager2, &QNetworkAccessManager::finished, this,
@@ -19,31 +28,37 @@ KuGou::KuGou(QObject *parent) : QObject(parent) {
 }
 
 void KuGou::search(QString str) {
+  qDebug() << "search";
   m_albumId.clear();
   m_fileHash.clear();
   m_albumName.clear();
   m_songName.clear();
   m_singerName.clear();
-  QString KGAPISTR1 =
-      QString(
-          "http://songsearch.kugou.com/song_search_v2?keyword="
-          "%1&page=&pagesize=40&userid=-1&clientver=&platform=WebFilter&tag=em&"
-          "filter=2&iscorrection=1&privilege_filter=0")
-          .arg(str);
+  QString KGAPISTR1 = QString(
+                          "http://songsearch.kugou.com/song_search_v2?keyword="
+                          "%1&page=&pagesize=200&userid=-1&clientver=&platform="
+                          "WebFilter&tag=em&"
+                          "filter=2&iscorrection=1&privilege_filter=0")
+                          .arg(str);
   network_request->setUrl(QUrl(KGAPISTR1));
   network_manager->get(*network_request);
 }
 
 void KuGou::replyFinished(QNetworkReply *reply) {
+  qDebug() << "replyFinished";
   if (reply->error() == QNetworkReply::NoError) {
     // QByteArray类提供了一个字节数组
     QByteArray bytes = reply->readAll();
     QString result = QString(bytes);
     parseJson_getAlbumID(result);
+  } else {
+    qDebug() << "网络错误";
   }
+  emit albumIdChanged(m_albumId);
 }
 
 void KuGou::parseJson_getAlbumID(QString json) {
+  qDebug() << "parseJson_getAlbumID";
   QByteArray ba = json.toUtf8();
   // data()返回一个指向存储在字节数组中的数据的指针。该指针可用于访问和修改组成数组的字节。数据是'\0'终止的，也就是说，在返回的指针之后，您可以访问的字节数是size()
   //+ 1，包括'\0'终止符
@@ -79,8 +94,9 @@ void KuGou::parseJson_getAlbumID(QString json) {
                   QJsonObject object = value.toObject();
                   if (object.contains("SingerName")) {
                     QJsonValue SingerName_value = object.take("SingerName");
-                    if (SingerName_value.isString())
+                    if (SingerName_value.isString()) {
                       m_singerName.push_back(SingerName_value.toString());
+                    }
                   }
                   if (object.contains("SongName")) {
                     QJsonValue SongName_value = object.take("SongName");
@@ -120,6 +136,7 @@ void KuGou::parseJson_getAlbumID(QString json) {
 }
 
 void KuGou::onclickPlay(int index) {
+  qDebug() << "onclicked";
   m_lyrics.clear();
   m_image.clear();
   m_url.clear();
@@ -133,14 +150,18 @@ void KuGou::onclickPlay(int index) {
 }
 
 void KuGou::replyFinished2(QNetworkReply *reply) {
+  qDebug() << "replyFinished2";
   if (reply->error() == QNetworkReply::NoError) {
     QByteArray bytes = reply->readAll();
     QString result = bytes;
     parseJson_getplay_url(result);
+  } else {
+    qDebug() << "处理错误";
   }
 }
 
 void KuGou::parseJson_getplay_url(QString json) {
+  qDebug() << "parseJson_getplay_url";
   QByteArray ba = json.toUtf8();
   const char *ch = ba.data();
   QByteArray byte_array;
@@ -160,6 +181,7 @@ void KuGou::parseJson_getplay_url(QString json) {
               QString play_lrcStr = play_lyric_value.toString();
               if (play_lrcStr != "") {
                 m_lyrics = play_lrcStr;
+                emit lrcAdd(play_lrcStr);
               }
             }
           }
@@ -169,6 +191,7 @@ void KuGou::parseJson_getplay_url(QString json) {
               QString play_urlStr = play_url_value.toString();
               if (play_urlStr != "") {
                 m_url = play_urlStr;
+                emit mediaAdd(play_urlStr);
               }
             }
           }
@@ -181,8 +204,12 @@ void KuGou::parseJson_getplay_url(QString json) {
               }
             }
           }
+          emit urlChanged(m_url);
+          return;
         }
       }
     }
+  } else {
+    qDebug() << "歌曲加载失败";
   }
 }

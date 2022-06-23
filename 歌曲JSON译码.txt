@@ -1,0 +1,36 @@
+{
+	"status": 1,
+	"err_code": 0,
+	"data": {
+		"hash": "A8A595A1032368319D48C4E62618C919",
+		"timelength": 323000,
+		"filesize": 5171623,
+		"audio_name": "BEYOND - \u6d77\u9614\u5929\u7a7a",
+		"have_album": 1,
+		"album_name": "\u9065\u671b",
+		"album_id": "493161",
+		"img": "http:\/\/imge.kugou.com\/stdmusic\/20200620\/20200620070905517202.jpg",
+		"have_mv": 1,
+		"video_id": "60479",
+		"author_name": "BEYOND",
+		"song_name": "",
+		"lyrics": "",
+		"author_id": "7249",
+		"privilege": 10,
+		"privilege2": "1010",
+		"play_url": "",
+		"authors": [{
+			"author_id": "7249",
+			"author_name": "BEYOND",
+			"is_publish": "1",
+			"sizable_avatar": "http:\/\/singerimg.kugou.com\/uploadpic\/softhead\/{size}\/20160418\/20160418100531196.jpg",
+			"avatar": "http:\/\/singerimg.kugou.com\/uploadpic\/softhead\/400\/20160418\/20160418100531196.jpg"
+		}],
+		"is_free_part": 0,
+		"bitrate": 128,
+		"recommend_album_id": "493161",
+		"album_audio_id": 40288246,
+		"audio_id": "3261014",
+		"has_privilege": true
+	}
+}
