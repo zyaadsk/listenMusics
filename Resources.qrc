@@ -67,5 +67,16 @@
         <file>qml/SongList.qml</file>
         <file>qml/MusicPlayer.qml</file>
         <file>qml/SearchBar.qml</file>
+        <file>qml/CurrentSong.qml</file>
+        <file>qml/PlaySong.qml</file>
+        <file>resource/background/1.png</file>
+        <file>resource/background/2.png</file>
+        <file>resource/background/3.png</file>
+        <file>resource/background/4.png</file>
+        <file>resource/background/5.png</file>
+        <file>resource/background/6.png</file>
+        <file>resource/background/7.png</file>
+        <file>resource/background/8.png</file>
+        <file>qml/Spectrogram.qml</file>
     </qresource>
 </RCC>

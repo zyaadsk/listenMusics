@@ -4,7 +4,6 @@ import QtQuick.Controls as QQC
 import QtMultimedia
 
 Rectangle {
-    anchors.fill: parent
     property alias mediaplay: mediaplayer
     property var url
 
@@ -91,10 +90,8 @@ Rectangle {
     MediaPlayer {
         id: mediaplayer
         audioOutput: AudioOutput {}
-
         onPositionChanged: {
-            var currentTimeIndex=lyricDialog.currentLine(position)
-            lyricDialog.lyricView.currentIndex = currentTimeIndex
+            playsong.slider.value = Number(mediaplay.position)
         }
     }
 }
