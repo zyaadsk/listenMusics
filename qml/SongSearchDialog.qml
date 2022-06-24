@@ -146,9 +146,11 @@ Rectangle {
         onUrlChanged: {
             console.log("onclicked")
             content.mediaplay.source = url
-            console.log(url)
             content.mediaplay.play()
             actions.playAction.icon.source = "/resource/image/暂停.png"
+            img.source = image
+            songtx.text = song
+            singertx.text = singer
         }
     }
 }

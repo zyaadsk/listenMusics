@@ -18,6 +18,8 @@ class KuGou : public QObject {
   Q_PROPERTY(QString url READ url WRITE setUrl NOTIFY urlChanged)
   Q_PROPERTY(QString lyrics READ lyrics WRITE setLyrics NOTIFY lyricsChanged)
   Q_PROPERTY(QString image READ image WRITE setImage NOTIFY imageChanged)
+  Q_PROPERTY(QString song READ song WRITE setSong NOTIFY songChanged)
+  Q_PROPERTY(QString singer READ singer WRITE setSinger NOTIFY singerChanged)
 
  private:
   QNetworkAccessManager *network_manager;
@@ -33,6 +35,8 @@ class KuGou : public QObject {
   QString m_image;
   QString m_lyrics;
   QString m_url;
+  QString m_song;
+  QString m_singer;
 
  protected slots:
   void replyFinished(QNetworkReply *reply);
@@ -56,6 +60,8 @@ class KuGou : public QObject {
   QString lyrics() const { return m_lyrics; }
   QList<double> duration() const { return m_duration; }
   QString image() const { return m_image; }
+  QString song() const { return m_song; }
+  QString singer() const { return m_singer; }
 
  signals:
   void mediaAdd(QString play_urlStr);
@@ -69,6 +75,8 @@ class KuGou : public QObject {
   void lyricsChanged(QString lyrics);
   void durationChanged(QList<double> duration);
   void imageChanged(QString image);
+  void songChanged(QString song);
+  void singerChanged(QString singer);
 
  public slots:
   void setAlbumId(QList<QString> albumId) {
@@ -125,6 +133,20 @@ class KuGou : public QObject {
 
     m_image = image;
     emit imageChanged(m_image);
+  }
+
+  void setSong(QString song) {
+    if (m_song == song) return;
+
+    m_song = song;
+    emit songChanged(m_song);
+  }
+
+  void setSinger(QString singer) {
+    if (m_singer == singer) return;
+
+    m_singer = singer;
+    emit songChanged(m_singer);
   }
 };
 

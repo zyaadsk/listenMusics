@@ -66,5 +66,6 @@
         <file>qml/LyricShow.qml</file>
         <file>qml/SongList.qml</file>
         <file>qml/MusicPlayer.qml</file>
+        <file>qml/SearchBar.qml</file>
     </qresource>
 </RCC>

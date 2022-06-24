@@ -204,6 +204,25 @@ void KuGou::parseJson_getplay_url(QString json) {
               }
             }
           }
+          if (valuedataObject.contains("song_name")) {
+            QJsonValue song_name_value = valuedataObject.take("song_name");
+            if (song_name_value.isString()) {
+              QString song_name = song_name_value.toString();
+              if (song_name != "") {
+                m_song = song_name;
+              }
+            }
+          }
+          if (valuedataObject.contains("author_name")) {
+            QJsonValue author_name_value = valuedataObject.take("author_name");
+            if (author_name_value.isString()) {
+              QString author_name = author_name_value.toString();
+              if (author_name != "") {
+                m_singer = author_name;
+                qDebug() << m_singer;
+              }
+            }
+          }
           emit urlChanged(m_url);
           return;
         }

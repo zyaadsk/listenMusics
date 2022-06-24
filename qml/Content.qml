@@ -83,6 +83,7 @@ Rectangle {
                     mediaplayer.stop() //将上一首歌曲结束
                     mediaplayer.source = media //将资源导入mediaplayer
                     mediaplayer.play() //mediaplayer进行播放的实现
+                    actions.playAction.icon.source = "/resource/image/暂停.png"
                 }
             }
         }

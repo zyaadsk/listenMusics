@@ -21,6 +21,7 @@ Item {
                            StandardPaths.DocumentsLocation)
         fileMode: FileDialog.OpenFiles
         nameFilters: ["Music files (*.mp3 *.ogg)"] //设置文件类型
+        onAccepted: content.setFilesModel(fileOpenDialog.selectedFiles)
     }
 
     QQC.Dialog {
