@@ -76,7 +76,7 @@ Item {
     function currentLine(currentTime){
         for(var i=0;i<cLyric.time.length;i++){
             if(currentTime<cLyric.time[i]){
-                console.log(i);
+//                console.log(i);
 
                 return i-1;
             }           
