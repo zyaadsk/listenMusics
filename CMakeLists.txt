@@ -28,20 +28,16 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Qml)
 find_package(Qt6 REQUIRED COMPONENTS Network)
-find_package(Qt6 REQUIRED COMPONENTS Multimedia)
-find_package(Qt6 REQUIRED COMPONENTS Core)
 
 set(PROJECT_SOURCES
         main.cpp
-        Resources.qrc
-        mainwindow.h
         mainwindow.cpp
+        mainwindow.h
+        Resources.qrc
         kugou.h
         kugou.cpp
-        audiorecorder.h
-        audiorecorder.cpp
-        decode.h
-        decode.cpp
+        lyric.h
+        lyric.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -64,8 +60,6 @@ endif()
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Qml)
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Network)
-target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Multimedia)
-target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 
 set_target_properties(ListenToSomeMusic PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

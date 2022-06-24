@@ -9,7 +9,7 @@ Rectangle {
     width: parent.width / 5 * 4
     anchors.bottom: parent.bottom
     anchors.right: parent.right
-    anchors.top: searchBar.bottom
+    anchors.top: searchRowlayout.bottom
     anchors.margins: 10
     anchors.bottomMargin: 40
     radius: 4
@@ -24,7 +24,6 @@ Rectangle {
             Layout.leftMargin: 50
             Layout.bottomMargin: 20
             Layout.alignment: Qt.AlignTop
-            anchors.topMargin: 10
 
             Text {
                 Layout.preferredWidth: 120
@@ -145,13 +144,15 @@ Rectangle {
             }
         }
         onUrlChanged: {
+            console.log("onclicked")
             content.mediaplay.source = url
-            console.log(url)
             content.mediaplay.play()
             actions.playAction.icon.source = "/resource/image/暂停.png"
-            currentsong.img.source = image
-            currentsong.songtx.text = song
-            currentsong.singertx.text = singer
+            img.source = image
+            songtx.text = song
+            singertx.text = singer
+            lyricDialog.cLyric.setLyric(lyrics)
+            console.log(lyrics)
         }
     }
 }

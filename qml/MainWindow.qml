@@ -8,7 +8,7 @@ ApplicationWindow {
     width: 870
     height: 680
     visible: true
-    title: qsTr("听点儿音乐")
+    title: qsTr("听点音乐")
 
     menuBar: MenuBar {
         id: appMenuBar
@@ -21,18 +21,36 @@ ApplicationWindow {
         }
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: "red"
-        opacity: 0.5
-    }
-
     Content {
         id: content
+        anchors.fill: parent
     }
 
-    PlaySong {
-        id: playsong
+    RowLayout {
+        id: playRowlayout
+
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.rightMargin: 20
+        ToolButton{
+            action: actions.lyricAction
+        }
+
+        ToolButton {
+            action: actions.lastAction
+            text: qsTr("")
+        }
+        ToolButton {
+            action: actions.playAction
+            text: qsTr("")
+        }
+        ToolButton {
+            action: actions.nextAction
+            text: qsTr("")
+        }
+        Slider {
+            id: slider
+        }
     }
 
     Actions {
@@ -40,7 +58,7 @@ ApplicationWindow {
     }
 
     SearchBar {
-        id: searchBar
+        id: searchRowlayout
     }
 
     SongSearchDialog {
@@ -48,11 +66,66 @@ ApplicationWindow {
         visible: false
     }
 
+    LyricShow{
+        id:lyricDialog
+        anchors.fill:parent
+        visible:false
+    }
+
     Dialogs {
         id: dialogs
     }
 
-    CurrentSong {
-        id: currentsong
+    RowLayout {
+        id: smallRowlayout
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.margins: 10
+        anchors.bottomMargin: 40
+        spacing: 10
+
+        Rectangle {
+            height: 60
+            width: 60
+            Image {
+                anchors.fill: parent
+                id: img
+                fillMode: Image.PreserveAspectFit
+                clip: true
+                TapHandler {
+                    onTapped: {
+
+                    }
+                }
+            }
+        }
+
+        ColumnLayout {
+            id: smallColumnlayout
+            height: 60
+            width: 100
+            spacing: 4
+
+            Rectangle {
+                height: 33
+                width: 100
+                clip: true
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    id: songtx
+                    font.bold: true
+                }
+            }
+
+            Rectangle {
+                height: 33
+                width: 120
+                clip: true
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    id: singertx
+                }
+            }
+        }
     }
 }

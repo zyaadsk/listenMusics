@@ -8,17 +8,18 @@ Item {
     property alias playAction: play
     property alias openFileAction: openFile
     property alias aboutAction: about
+    property alias lyricAction: lyric
     Action {
         id: search
         text: qsTr("搜索歌曲")
         icon.source: "/resource/image/查找.png"
         onTriggered: {
             songsearchdialog.visible = true
-            if (searchBar.inputField.text.length === 0) {
+            if (searchRowlayout.inputField.text.length === 0) {
                 songsearchdialog.kugou.search(
-                            searchBar.inputField.placeholderText)
+                            searchRowlayout.inputField.placeholderText)
             } else {
-                songsearchdialog.kugou.search(searchBar.inputField.text)
+                songsearchdialog.kugou.search(searchRowlayout.inputField.text)
             }
         }
     }
@@ -58,5 +59,16 @@ Item {
         text: qsTr("&About")
         icon.name: "help-about"
         onTriggered: dialogs.openaboutDialog()
+    }
+    Action{
+        id:lyric
+        text: qsTr("歌词")
+        onTriggered: {
+            lyricDialog.cLyric.divideLyrics()
+            lyricDialog.getL()
+            lyricDialog.visible=true
+            songsearchdialog.visible=false
+
+        }
     }
 }

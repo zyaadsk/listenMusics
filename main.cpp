@@ -4,13 +4,15 @@
 
 #include "kugou.h"
 #include "mainwindow.h"
+#include "lyric.h"
 
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   // template <typename T> int qmlRegisterType(const char *uri, int
   // versionMajor, int versionMinor, const char *qmlName)
   //这个模板函数在QML系统中用名称qmlName注册c++类型，在从uri导入的库中使用由versionMajor和versionMinor组成的版本号。返回QML类型id。
-  qmlRegisterType<KuGou>("KuGou", 1, 0, "KuGou");
+  qmlRegisterType<KuGou, 1>("KuGou", 1, 0, "KuGou");
+  qmlRegisterType<Lyric>("Lyric",1,0,"Lyric");
 
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/qml/MainWindow.qml"));
