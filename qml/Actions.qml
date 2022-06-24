@@ -8,6 +8,7 @@ Item {
     property alias playAction: play
     property alias openFileAction: openFile
     property alias aboutAction: about
+    property alias lyricAction: lyric
     Action {
         id: search
         text: qsTr("搜索歌曲")
@@ -58,5 +59,16 @@ Item {
         text: qsTr("&About")
         icon.name: "help-about"
         onTriggered: dialogs.openaboutDialog()
+    }
+    Action{
+        id:lyric
+        text: qsTr("歌词")
+        onTriggered: {
+            lyricDialog.cLyric.divideLyrics()
+            lyricDialog.getL()
+            lyricDialog.visible=true
+            songsearchdialog.visible=false
+
+        }
     }
 }
