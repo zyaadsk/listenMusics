@@ -1,29 +1,29 @@
 import QtQuick
 import QtQuick.Controls
 Item {
-    id:songlists
-    property var url
-    property  var urlsit
-    property int  location
-    property var indexs
-    property alias listmodel:lm
-    property alias listview:listview
-    property int liststat:1
-    property int value:leftmargin.mod
+//    id:songlists
+//    property var url
+//    property  var urlsit
+//    property int  location
+//    property var indexs
+//    property alias listmodel:lm
+//    property alias listview:listview
+//    property int liststat:1
+//    property int value:leftmargin.mod
 
-    Button{
-    id:delets
-    height: 20
-    width: 60
-    visible: false
-    text:qsTr("删除歌曲")
-    onClicked: {
-        //location=getlocation()
-        //console.log(location)
-        lm.remove(index)
-        delets.visible=false
-    }
-        }
+//    Button{
+//    id:delets
+//    height: 20
+//    width: 60
+//    visible: false
+//    text:qsTr("删除歌曲")
+//    onClicked: {
+//        //location=getlocation()
+//        //console.log(location)
+//        lm.remove(index)
+//        delets.visible=false
+//    }
+//        }
 
 
 
