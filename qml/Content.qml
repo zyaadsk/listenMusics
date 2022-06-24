@@ -91,5 +91,10 @@ Rectangle {
     MediaPlayer {
         id: mediaplayer
         audioOutput: AudioOutput {}
+
+        onPositionChanged: {
+            var currentTimeIndex=lyricDialog.currentLine(position)
+            lyricDialog.lyricView.currentIndex = currentTimeIndex
+        }
     }
 }

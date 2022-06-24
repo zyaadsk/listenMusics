@@ -32,6 +32,10 @@ ApplicationWindow {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.rightMargin: 20
+        ToolButton{
+            action: actions.lyricAction
+        }
+
         ToolButton {
             action: actions.lastAction
             text: qsTr("")
@@ -60,6 +64,12 @@ ApplicationWindow {
     SongSearchDialog {
         id: songsearchdialog
         visible: false
+    }
+
+    LyricShow{
+        id:lyricDialog
+        anchors.fill:parent
+        visible:false
     }
 
     Dialogs {

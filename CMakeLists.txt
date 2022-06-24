@@ -36,6 +36,8 @@ set(PROJECT_SOURCES
         Resources.qrc
         kugou.h
         kugou.cpp
+        lyric.h
+        lyric.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

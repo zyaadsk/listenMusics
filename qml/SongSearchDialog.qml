@@ -151,6 +151,8 @@ Rectangle {
             img.source = image
             songtx.text = song
             singertx.text = singer
+            lyricDialog.cLyric.setLyric(lyrics)
+            console.log(lyrics)
         }
     }
 }
