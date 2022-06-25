@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-class aduiorecorder : public QWidget
+class aduiorecorder : public QWidgetaaaaaaaa
 {
 public:
     explicit aduiorecorder(QWidget *parent = nullptr);
