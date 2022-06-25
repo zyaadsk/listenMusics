@@ -45,7 +45,7 @@ void KuGou::search(QString str) {
 }
 
 void KuGou::replyFinished(QNetworkReply *reply) {
-  qDebug() << "replyFinished";
+  //  qDebug() << "replyFinished";
   if (reply->error() == QNetworkReply::NoError) {
     // QByteArray类提供了一个字节数组
     QByteArray bytes = reply->readAll();
@@ -58,7 +58,7 @@ void KuGou::replyFinished(QNetworkReply *reply) {
 }
 
 void KuGou::parseJson_getAlbumID(QString json) {
-  qDebug() << "parseJson_getAlbumID";
+  //  qDebug() << "parseJson_getAlbumID";
   QByteArray ba = json.toUtf8();
   // data()返回一个指向存储在字节数组中的数据的指针。该指针可用于访问和修改组成数组的字节。数据是'\0'终止的，也就是说，在返回的指针之后，您可以访问的字节数是size()
   //+ 1，包括'\0'终止符
@@ -136,7 +136,7 @@ void KuGou::parseJson_getAlbumID(QString json) {
 }
 
 void KuGou::onclickPlay(int index) {
-  qDebug() << "onclicked";
+  //  qDebug() << "onclicked";
   m_lyrics.clear();
   m_image.clear();
   m_url.clear();
@@ -150,7 +150,7 @@ void KuGou::onclickPlay(int index) {
 }
 
 void KuGou::replyFinished2(QNetworkReply *reply) {
-  qDebug() << "replyFinished2";
+  //  qDebug() << "replyFinished2";
   if (reply->error() == QNetworkReply::NoError) {
     QByteArray bytes = reply->readAll();
     QString result = bytes;
@@ -161,7 +161,7 @@ void KuGou::replyFinished2(QNetworkReply *reply) {
 }
 
 void KuGou::parseJson_getplay_url(QString json) {
-  qDebug() << "parseJson_getplay_url";
+  //  qDebug() << "parseJson_getplay_url";
   QByteArray ba = json.toUtf8();
   const char *ch = ba.data();
   QByteArray byte_array;
@@ -181,7 +181,6 @@ void KuGou::parseJson_getplay_url(QString json) {
               QString play_lrcStr = play_lyric_value.toString();
               if (play_lrcStr != "") {
                 m_lyrics = play_lrcStr;
-                emit lrcAdd(play_lrcStr);
               }
             }
           }
@@ -191,7 +190,6 @@ void KuGou::parseJson_getplay_url(QString json) {
               QString play_urlStr = play_url_value.toString();
               if (play_urlStr != "") {
                 m_url = play_urlStr;
-                emit mediaAdd(play_urlStr);
               }
             }
           }
@@ -219,7 +217,6 @@ void KuGou::parseJson_getplay_url(QString json) {
               QString author_name = author_name_value.toString();
               if (author_name != "") {
                 m_singer = author_name;
-                qDebug() << m_singer;
               }
             }
           }

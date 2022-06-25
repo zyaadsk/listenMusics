@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 
+#include_directories("/run/media/root/date/softwareDevelopment/ListenToSomeMusic/include/")
+
+#link_directories("/run/media/root/date/softwareDevelopment/ListenToSomeMusic/lib/")
+
 project(ListenToSomeMusic VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -28,16 +32,18 @@ find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 find_package(Qt6 REQUIRED COMPONENTS Qml)
 find_package(Qt6 REQUIRED COMPONENTS Network)
+find_package(Qt6 REQUIRED COMPONENTS Multimedia)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
         Resources.qrc
+        mainwindow.h
+        mainwindow.cpp
         kugou.h
         kugou.cpp
-        lyric.h
-        lyric.cpp
+        decode.h
+        decode.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -60,6 +66,9 @@ endif()
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Qml)
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Network)
+target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Multimedia)
+target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(ListenToSomeMusic PRIVATE avutil avcodec avfilter avdevice avformat postproc swresample)
 
 set_target_properties(ListenToSomeMusic PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

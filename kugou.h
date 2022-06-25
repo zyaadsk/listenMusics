@@ -64,9 +64,6 @@ class KuGou : public QObject {
   QString singer() const { return m_singer; }
 
  signals:
-  void mediaAdd(QString play_urlStr);
-  void nameAdd(QString play_name);
-  void lrcAdd(QString play_lrcStr);
   void albumIdChanged(QList<QString> albumId);
   void singerNameChanged(QList<QString> singerName);
   void songNameChanged(QList<QString> songName);
