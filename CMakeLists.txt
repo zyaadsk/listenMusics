@@ -44,6 +44,8 @@ set(PROJECT_SOURCES
         kugou.cpp
         decode.h
         decode.cpp
+        lyric.h
+        lyric.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

@@ -21,14 +21,16 @@ ApplicationWindow {
         }
     }
 
-    Rectangle {
-        anchors.fill: parent
-        color: "red"
-        opacity: 0.5
+    Spectrogram {
+        id: spectrogram
     }
 
     Content {
         id: content
+    }
+
+    PlayList {
+        id: leftmargin
     }
 
     PlaySong {
@@ -45,6 +47,17 @@ ApplicationWindow {
 
     SongSearchDialog {
         id: songsearchdialog
+        visible: false
+    }
+
+    LyricShow {
+        id: lyricDialog
+        anchors.fill: parent
+        visible: false
+    }
+
+    DesktopLyric {
+        id: desktopLyricDialog
         visible: false
     }
 

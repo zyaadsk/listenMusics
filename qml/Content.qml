@@ -4,20 +4,10 @@ import QtQuick.Controls as QQC
 import QtMultimedia
 
 Rectangle {
+    anchors.fill: parent
     property alias mediaplay: mediaplayer
-    property var url
 
-    function setFilesModel() {
-        for (var j = 0; j < arguments[0].length; j++) {
-            url = arguments[0] //保存文件路径
-            lm.append({
-                          "media": arguments[0][j]
-                      })
-        }
-    }
-    function setValue() {
-        mediaplayer.value = arguments[0]
-    }
+
 
     function playMedia() {
         //播放功能
@@ -61,37 +51,19 @@ Rectangle {
             }
         }
     }
-
-    ListView {
-        id: listview
-        anchors.fill: parent
-        model: ListModel {
-            id: lm
-        }
-        delegate: Rectangle {
-            id: rect
-            height: 24
-            width: parent.width
-            Text {
-                id: tx
-                anchors.fill: parent
-                text: media //文件路径名
-            }
-            TapHandler {
-                onTapped: {
-                    mediaplayer.stop() //将上一首歌曲结束
-                    mediaplayer.source = media //将资源导入mediaplayer
-                    mediaplayer.play() //mediaplayer进行播放的实现
-                    actions.playAction.icon.source = "/resource/image/暂停.png"
-                }
-            }
-        }
-    }
     MediaPlayer {
         id: mediaplayer
         audioOutput: AudioOutput {}
+
         onPositionChanged: {
-            playsong.slider.value = Number(mediaplay.position)
+            var currentTimeIndex=lyricDialog.currentLine(position)
+            lyricDialog.lyricView.currentIndex = currentTimeIndex
+            desktopLyricDialog.desktopTextNow=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex).lyric
+            if(lyricDialog.lyricView.currentIndex != lyricDialog.cLyric.time.length-1){
+                desktopLyricDialog.desktopTextNext=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex+1).lyric
+            }else{
+                desktopLyricDialog.desktopTextNext=" "
+            }
         }
     }
 }
