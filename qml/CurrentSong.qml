@@ -22,8 +22,6 @@ Rectangle {
         spacing: 5
 
         Rectangle {
-            id: lyric
-
             height: 60
             width: 60
             Image {
@@ -35,14 +33,7 @@ Rectangle {
                 source: "/resource/background/1.png"
                 TapHandler {
                     onTapped: {
-                        var lyricCounts = lyricDialog.counts++
-                        if (lyricCounts % 2 == 0) {
-                            lyricDialog.visible = true
-                            songsearchdialog.visible = false
-                        } else {
-                            lyricDialog.visible = false
-                            songsearchdialog.visible = true
-                        }
+
                     }
                 }
             }

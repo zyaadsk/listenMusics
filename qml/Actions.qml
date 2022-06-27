@@ -8,15 +8,12 @@ Item {
     property alias playAction: play
     property alias openFileAction: openFile
     property alias aboutAction: about
-    property alias desktopExitAction: desktopExit
-
     Action {
         id: search
         text: qsTr("搜索歌曲")
         icon.source: "/resource/image/查找.png"
         onTriggered: {
             songsearchdialog.visible = true
-            lyricDialog.visible = false
             if (searchBar.inputField.text.length === 0) {
                 songsearchdialog.kugou.search(
                             searchBar.inputField.placeholderText)
@@ -61,40 +58,5 @@ Item {
         text: qsTr("&About")
         icon.name: "help-about"
         onTriggered: dialogs.openaboutDialog()
-    }
-    //    Action {
-    //        id: lyric
-    //        text: qsTr("歌词")
-    //        onTriggered: {
-    //            var lyricCounts = lyricDialog.counts++
-    //            if (lyricCounts % 2 == 0) {
-    //                lyricDialog.visible = true
-    //                songsearchdialog.visible = false
-    //            } else {
-    //                lyricDialog.visible = false
-    //                songsearchdialog.visible = true
-    //            }
-    //        }
-    //    }
-    //    Action {
-    //        id: desktop
-    //        text: qsTr("桌面歌词")
-    //        onTriggered: {
-    //            var desktopLyricCounts = desktopLyricDialog.counts++
-
-    //            //            console.log("桌面歌词"+desktopLyricCounts)
-    //            if (desktopLyricCounts % 2 == 0) {
-    //                desktopLyricDialog.visible = true
-    //            } else {
-    //                desktopLyricDialog.visible = false
-    //            }
-    //        }
-    //    }
-    Action {
-        id: desktopExit
-        icon.source: "/resource/image/close.png"
-        onTriggered: {
-            desktopLyricDialog.visible = false
-        }
     }
 }

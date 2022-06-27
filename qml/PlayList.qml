@@ -13,21 +13,16 @@ Item {
         listmodels.clear()
         for (var j in arguments[0]) {
            listmodels.append({
-                          "medias": arguments[0][j]
+                          "medias": arguments[0][j],"names":arguments[0][j]
                       })
         }
+        //dialogs.state=1
         //urlss = arguments[0] //保存文件路径
 
     }
 
-    function getlocation(){
-        for(var is=0;;is++)
-        {
-            if(publicview.delegate.isCurrentItem)
-                break
-            publicview.currentIndex=is
-            console.log("当前所在视图:"+publicview.currentIndex)
-        }
+    function clearmodel(){
+        listmodels.clear()
     }
 
     ListModel{
@@ -84,6 +79,7 @@ Item {
             width:300
         //            value: ListView.isCurrentItem ? publicview.currentIndex:value
         }
+
 
 }
 

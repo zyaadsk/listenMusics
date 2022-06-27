@@ -35,10 +35,6 @@ ApplicationWindow {
         id:leftmargin
     }
 
-    SongList{
-        id:songList
-    }
-
     PlaySong {
         id: playsong
     }
@@ -47,23 +43,17 @@ ApplicationWindow {
         id: actions
     }
 
+    SongList{
+        id:x
+        visible:false
+    }
+
     SearchBar {
         id: searchBar
     }
 
     SongSearchDialog {
         id: songsearchdialog
-        visible: false
-    }
-
-    LyricShow{
-        id:lyricDialog
-        anchors.fill:parent
-        visible:false
-    }
-
-    DesktopLyric{
-        id:desktopLyricDialog
         visible: false
     }
 

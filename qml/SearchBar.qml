@@ -23,7 +23,6 @@ RowLayout {
         Keys.onPressed: {
             if (event.key === Qt.Key_Return) {
                 songsearchdialog.visible = true
-                lyricDialog.visible = false
                 if (inputField.text.length === 0) {
                     songsearchdialog.kugou.search(inputField.placeholderText)
                 } else {
