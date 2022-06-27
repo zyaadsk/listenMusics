@@ -15,6 +15,10 @@ Rectangle {
     radius: 4
     RowLayout {
         id: smallRowlayout
+        //        anchors.bottom: parent.bottom
+        //        anchors.left: parent.left
+        //        anchors.margins: 10
+        //        anchors.bottomMargin: 40
         spacing: 5
 
         Rectangle {
@@ -46,6 +50,8 @@ Rectangle {
 
         ColumnLayout {
             id: smallColumnlayout
+            //            height: 60
+            //            width: 100
             spacing: 4
 
             Rectangle {

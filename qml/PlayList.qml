@@ -10,6 +10,7 @@ Item {
     property int mod:1
     function setFilesModel() {
 //        urlss = arguments[0] //保存文件路径
+        listmodels.clear()
         for (var j in arguments[0]) {
            listmodels.append({
                           "medias": arguments[0][j]
