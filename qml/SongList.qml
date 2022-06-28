@@ -131,6 +131,10 @@ Item {
                                     listview.currentIndex = index
                                     content.mediaplay.source = media //将资源导入md
                                     content.mediaplay.play() //md进行播放的实现
+
+                                    lyricDialog.cLyric.getLocalUrl(media)
+                                    lyricDialog.cLyric.divideLocalLyrics()
+                                    lyricDialog.getL()
                                 }
                             }
                         }
