@@ -1,22 +1,26 @@
 import QtQuick
 import QtQuick.Controls
 Item {
-    height: 800
-    width: 500
+    id:playlistqml
+    anchors.top:parent.top
+    anchors.bottom:currentsong.top
+    width: parent.width/5-10
+    anchors.left: parent.left
     property alias listmodels:listmodels
     property alias listmode :listmode
     property alias publicview:publicview
+    property alias settime:settime
+    property int state:0
     property var urlss
     property int mod:1
     function setFilesModel() {
-//        urlss = arguments[0] //保存文件路径
         for (var j in arguments[0]) {
            listmodels.append({
-                          "medias": arguments[0][j]
+                          "medias": arguments[0][j],
+                                 "names":arguments[0][j].toString(),
+                                // "lyric":"abc"
                       })
         }
-        //urlss = arguments[0] //保存文件路径
-
     }
 
     function getlocation(){
@@ -28,6 +32,11 @@ Item {
             console.log("当前所在视图:"+publicview.currentIndex)
         }
     }
+    Rectangle{
+        anchors.fill: parent
+        border.color: "red"
+        //color: "gray"
+        //opacity: 0.3
 
     ListModel{
         id:listmode
@@ -40,12 +49,17 @@ Item {
 
     TextField{
                id:listname
-
+               visible: false
+               x:250
+               y:10
+               z:5
+               placeholderText: qsTr("请输入歌单名称")
+               //text: "????"
                onAccepted: {
-                   console.log("this:"+text)
-                   headertext.text=text
+                   publicview.currentItem.listname=text
                    listname.visible=false
-                   clear()
+                   //clear()
+                   //visible=false
                }
            }
 
@@ -56,36 +70,38 @@ Item {
         text: "新建"
         onClicked: {
             mod++
-            //newlist.source
             listmode.append({"nomber":mod})
-
-
-            //publicview.currentIndex=publicview.model-1
-            //mod=publicview.model
-
-
-            //publicview.model[publicview.model].value=publicview.model
-            //console.log()
-            //publicview.currentIndex++
-
-
+            listname.visible=true
         }
     }
     ListView{
         id:publicview
-        anchors.fill: parent
+        height: 500
+        width: playlistqml.width-2
         model:listmode
         delegate:
             SongList
         {
-            //id:liss
-            height: 400
-            width:300
-        //            value: ListView.isCurrentItem ? publicview.currentIndex:value
+            height: 100
+            width: parent.width
         }
 
 }
 
+    Item {
+        Timer {
+            id:settime
+            interval: 520; running: false; repeat: true
+            onTriggered: {
+                listmodels.clear()
+                running=false
+            }
+        }
+
+        Text { id: time }
+    }
+
+}
 }
 
 

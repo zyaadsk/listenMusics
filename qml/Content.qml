@@ -6,6 +6,9 @@ import QtMultimedia
 Rectangle {
     anchors.fill: parent
     property alias mediaplay: mediaplayer
+    property var url
+
+
 
     function playMedia() {
         //播放功能
@@ -51,21 +54,16 @@ Rectangle {
     }
     MediaPlayer {
         id: mediaplayer
-        audioOutput: AudioOutput {
-            id: audiooutput
-            volume: playsong.value / 100
-        }
+        audioOutput: AudioOutput {}
 
         onPositionChanged: {
-            var currentTimeIndex = lyricDialog.currentLine(position)
+            var currentTimeIndex=lyricDialog.currentLine(position)
             lyricDialog.lyricView.currentIndex = currentTimeIndex
-            desktopLyricDialog.desktopTextNow = lyricDialog.lyricModel.get(
-                        lyricDialog.lyricView.currentIndex).lyric
-            if (lyricDialog.lyricView.currentIndex != lyricDialog.cLyric.time.length - 1) {
-                desktopLyricDialog.desktopTextNext = lyricDialog.lyricModel.get(
-                            lyricDialog.lyricView.currentIndex + 1).lyric
-            } else {
-                desktopLyricDialog.desktopTextNext = " "
+            //desktopLyricDialog.desktopTextNow=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex).lyric
+            if(lyricDialog.lyricView.currentIndex != lyricDialog.cLyric.time.length-1){
+                desktopLyricDialog.desktopTextNext=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex+1).lyric
+            }else{
+                desktopLyricDialog.desktopTextNext=" "
             }
         }
     }

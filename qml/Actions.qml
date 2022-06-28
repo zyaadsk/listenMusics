@@ -17,7 +17,6 @@ Item {
         onTriggered: {
             songsearchdialog.visible = true
             lyricDialog.visible = false
-            rectround.visible = false
             if (searchBar.inputField.text.length === 0) {
                 songsearchdialog.kugou.search(
                             searchBar.inputField.placeholderText)
@@ -46,11 +45,9 @@ Item {
             if (icon.source == "/resource/image/播放.png") {
                 content.playMedia()
                 icon.source = "/resource/image/暂停.png"
-                rectround.animation.running = true
             } else {
                 icon.source = "/resource/image/播放.png"
                 content.pauseMedia()
-                rectround.animation.running = false
             }
         }
     }

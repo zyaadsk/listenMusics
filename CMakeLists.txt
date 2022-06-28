@@ -42,6 +42,8 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         kugou.h
         kugou.cpp
+        decode.h
+        decode.cpp
         lyric.h
         lyric.cpp
 )

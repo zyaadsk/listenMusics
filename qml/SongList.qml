@@ -3,22 +3,26 @@ import QtQuick.Controls
 
 Item {
     id: songlists
-    property var url
-    property var urlsit
-    property int location
-    property var indexs
-    property alias listmodel: lm
+    //anchors.left: parent.left
+    property alias songmode: songmode
     property alias listview: listview
     property int liststat: 1
-    property int value: 1 //leftmargin.mod
+    property int timestat:1
+    property alias listname:headertext.text
+    property alias endtime:settime
+    property var listsource
     function getmodel() {
-        for (var j = 0; j <= listmodels.count; j++) {
-            console.log(listmodels.get(j).medias)
-            lm.append({
-                          "media": listmodels.get(j).medias
+        timestat=0
+        for (var j = 0; j <= playlist.listmodels.count; j++) {
+            songmode.append({
+                          "media": playlist.listmodels.get(j).medias,
+                                "name": playlist.listmodels.get(j).names,
+                                //"lyric":playlist.listmodels.get(j).layrics
                       })
         }
     }
+    Rectangle{
+        anchors.fill: parent
 
     Button {
         id: delets
@@ -29,26 +33,29 @@ Item {
         onClicked: {
             //location=getlocation()
             //console.log(location)
-            lm.remove(index)
+            songmode.remove(index)
             delets.visible = false
         }
     }
 
     ListModel {
-        id: lm
+        id:songmode
     }
 
     Rectangle {
         id: topitem
-        width: 120
-        height: 220
+        width:playlist.width
+        height:300
         border.color: "red"
         Column {
             Row {
-                Text {
-                    id: headertext
+                Rectangle{
+                    border.color: "gray"
                     height: 15
                     width: topitem.width
+                Text {
+                    id: headertext
+                    anchors.fill: parent
                     //anchors.centerIn:parentw
                     text: qsTr("本地音乐")
                     horizontalAlignment: Text.AlignHCenter
@@ -57,11 +64,14 @@ Item {
                             if (liststat == 1) {
                                 songlists.height = headertext.height
                                 addmusic.visible = false
+                                //listview.visible=false
                                 //                   addmusic.height=0
+                                //getmodel()
                                 liststat = 0
                             } else if (liststat == 0) {
                                 songlists.height = 300
                                 addmusic.visible = true
+                                //listview.visible=true
                                 //                       addmusic.height=10
                                 liststat = 1
                             }
@@ -71,16 +81,15 @@ Item {
                         }
                     }
                 }
+                }
             }
             Item {
                 id: listitem
                 height: topitem.height
                 width: 100
-
                 ListView {
                     id: listview
                     footer: addmusic
-                    anchors.fill: parent
                     remove: Transition {
                         ParallelAnimation {
                             NumberAnimation {
@@ -95,11 +104,12 @@ Item {
                             }
                         }
                     }
-                    model: lm
-                    delegate: delegates
+                    model: songmode
+                    delegate: /*delegates
 
                     Component {
-                        id: delegates
+                        id: delegates*/
+                        //anchors.fill: parent
                         Rectangle {
                             id: rect
                             height: 28
@@ -115,30 +125,25 @@ Item {
                                 }
                             }
                             TapHandler {
-                                acceptedButtons: Qt.LeftButton
-                                onTapped: mediaplay.source = media
+                                //双击播放
+                                onDoubleTapped: {
+                                    content.mediaplay.stop() //将上一首歌曲结束
+                                    listview.currentIndex = index
+                                    content.mediaplay.source = media //将资源导入md
+                                    //lyricDialog.cLyric.setLyric(lyric)
+                                    nowplaylist.nowmode.append({"media":listview.currentIndex.meida,
+                                                               "name":listview.currentIndex.name})
+                                    content.mediaplay.play() //md进行播放的实现
+                                }
                             }
-
                             Text {
                                 id: tx
                                 //color: rect.ListView.isCurrentItem ? "black" : "red"
                                 anchors.fill: parent
-                                text: index + "          " + media //文件路径名
-                            }
-                            TapHandler {
-                                onTapped: {
-                                    content.mediaplay.stop() //将上一首歌曲结束
-                                    listview.currentIndex = index
-                                    content.mediaplay.source = media //将资源导入md
-                                    content.mediaplay.play() //md进行播放的实现
-
-                                    lyricDialog.cLyric.getLocalUrl(media)
-                                    lyricDialog.cLyric.divideLocalLyrics()
-                                    lyricDialog.getL()
-                                }
+                                text: index + "          " + name //文件路径名
                             }
                         }
-                    }
+                    //}
                 }
             }
             Button {
@@ -147,34 +152,51 @@ Item {
                 y: listview.height
                 text: qsTr("添加歌曲")
                 onClicked: {
-                    publicview.currentIndex = index
-                    dialogs.openFileDialog()
-                    getmodel()
-                    //leftmargin.listmodels.clear()
+                    if(playlist.state==1)
+                    {
+                        console.log("网络收藏")
+                       publicview.currentIndex = index
+                        playlist.settime.running=true
+                        songlists.endtime.running=true
+                        songlists.endtime.repeat=true
+                        playlist.state=0
+                        console.log(playlist.state)
+                    }
+                    else
+                    {
+                        publicview.currentIndex = index
+                        dialogs.openFileDialog()
+                        songlists.endtime.running=true
+                        songlists.endtime.repeat=true
+                    }
 
-                    //value=publicview.currentIndex
-                    //leftmargin.getlocation()
-                    //lm.append({"media":})
-                    //console.log(urlss[1])
-                    //    for(var i=0;i<2;i++)
-                    //    for(var j=0;j<=listmodels.count;j++)
-                    //    {
-                    //        console.log(listmodels.get(j).media)
-                    //        lm.append({"media":listmodels.get(j).media})
-                    //    }
-
-                    //lm.append({"media":leftmargin.urlss[i]})
-                    //listmode.get(1).songlist.model=listmodels
-                    //topitem.border.color=publicview.isCurrentItem ? "black" : "red"
-                    //publicview.currentIndex=1
-                    //lm.append({"media":value})
-                    //console.log(url[1])
-                    //listview.model=mode.get(0).modes
-                    console.log("当前小视图的listmde是" + index)
-                    console.log("当前models是" + publicview.currentIndex)
                     //listmodels.clear()
                 }
             }
         }
     }
+
+    Item {
+        Timer {
+            id:settime
+            interval: 500; running: false; repeat: true
+            onTriggered: {
+                if(timestat==0)
+                {
+                    songlists.endtime.running=false
+                    songlists.endtime.repeat=false
+                    timestat=1
+                }
+                else
+                    if(playlist.listmodels.count!==0)
+                {
+                    console.log("执行一次")
+                    playlist.publicview.currentItem.getmodel()
+                }
+
+
+            }
+        }
+    }
+}
 }

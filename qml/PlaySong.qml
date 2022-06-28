@@ -4,21 +4,13 @@ import QtQuick.Layouts
 
 RowLayout {
     property alias slider: slider
-    property alias value: slidersound.value
+
+
     id: playRowlayout
 
     anchors.bottom: parent.bottom
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.rightMargin: 20
-
-    Slider {
-        id: slidersound
-        enabled: true
-        from: 0
-        to: 100
-        value: 20
-    }
-
     Rectangle {
         id: desktop
         width: 20
@@ -56,9 +48,34 @@ RowLayout {
         id: slider
         from: 0
         to: content.mediaplay.duration
-        value: content.mediaplay.position
         onMoved: {
             content.mediaplay.setPosition(slider.value)
         }
     }
+
+    Button{
+        id:collect
+        text: qsTr("收藏")
+        onClicked: {
+            playlist.listmodels.clear()
+            playlist.listmodels.append({"medias":content.mediaplay.source,
+                                           "names":currentsong.songtx.text,
+                                           //"lyrics":songsearchdialog.kugou.lyrics
+                                       })
+            playlist.state=1
+        }
+    }
+
+    Button{
+        id:nowplayliston
+        text: "当前播放列表"
+        onClicked:
+        {
+            nowplaylist.visible=true
+        }
+    }
+
+
+
+
 }

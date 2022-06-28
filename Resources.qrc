@@ -77,8 +77,9 @@
         <file>resource/background/6.png</file>
         <file>resource/background/7.png</file>
         <file>resource/background/8.png</file>
+        <file>qml/Spectrogram.qml</file>
         <file>qml/PlayList.qml</file>
         <file>qml/DesktopLyric.qml</file>
-        <file>qml/RectRound.qml</file>
+        <file>qml/NowPlayList.qml</file>
     </qresource>
 </RCC>
