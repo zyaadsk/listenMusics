@@ -152,6 +152,14 @@ Rectangle {
             currentsong.img.source = image
             currentsong.songtx.text = song
             currentsong.singertx.text = singer
+            rect_round.image.source = image
+
+            lyricDialog.counts = 0
+            desktopLyricDialog.counts = 0
+            lyricDialog.cLyric.setLyric(lyrics)
+            //            console.log(lyrics)
+            lyricDialog.cLyric.divideLyrics()
+            lyricDialog.getL()
         }
     }
 }

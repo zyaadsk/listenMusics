@@ -13,9 +13,12 @@ extern "C" {
 Decode::Decode(QObject *parent) : QObject{parent} {}
 
 bool Decode::decode(QString filePath, QString dirPath) {
-  // AVFormatContext:用来存储视音频封装格式（flv，mp4，rmvb，avi）中包含的所有信息
-  // 很多函数都要用到它作为参数。
-  // avformat_free_context()可以用来释放该Context，并且会释放由框架分配的所有内存
+  //  //
+  //  AVFormatContext:用来存储视音频封装格式（flv，mp4，rmvb，avi）中包含的所有信息
+  //  // 很多函数都要用到它作为参数。
+  //  //
+  //  avformat_free_context()
+  //  可以用来释放该Context，并且会释放由框架分配的所有内存
   AVFormatContext *pFormat = avformat_alloc_context();
   QByteArray temp = filePath.toUtf8();
   const char *path = temp.constData();
@@ -25,9 +28,12 @@ bool Decode::decode(QString filePath, QString dirPath) {
 
   //  参数说明：
   //  AVFormatContext *ps,
-  //  格式化的上下文。要注意，如果传入的是一个AVFormatContext*的指针，则该空间须自己手动清理，若传入的指针为空，则FFmpeg会内部自己创建。
+  //
+  //    格式化的上下文。要注意，如果传入的是一个AVFormatContext*的指针，则该空间须自己手动清理，若传入的指针为空，则FFmpeg会内部自己创建。
   //  const char *filename,
-  //  传入的文件地址。支持http,RTSP,以及普通的本地文件。地址最终会存入到AVFormatContext结构体当中。
+  //
+  //  传入的文件地址。支持http, RTSP,
+  //      以及普通的本地文件。地址最终会存入到AVFormatContext结构体当中。
   //  AVInputFormat *fmt, 指定输入的封装格式。一般传NULL，由FFmpeg自行探测。
   //  AVDictionary **options,
   //  其它参数设置。它是一个字典，用于参数传递，不传则写NULL
@@ -61,4 +67,8 @@ bool Decode::decode(QString filePath, QString dirPath) {
   SwrContext *swrContext = swr_alloc();
 
   AVSampleFormat in_sample = codecContext->sample_fmt;
+  getVertic(out);
+  return true;
 }
+
+void Decode::getVertic(QString filePath) {}

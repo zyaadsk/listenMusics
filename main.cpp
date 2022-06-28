@@ -2,7 +2,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "decode.h"
 #include "kugou.h"
+#include "lyric.h"
 #include "mainwindow.h"
 
 int main(int argc, char *argv[]) {
@@ -11,6 +13,8 @@ int main(int argc, char *argv[]) {
   // versionMajor, int versionMinor, const char *qmlName)
   //这个模板函数在QML系统中用名称qmlName注册c++类型，在从uri导入的库中使用由versionMajor和versionMinor组成的版本号。返回QML类型id。
   qmlRegisterType<KuGou>("KuGou", 1, 0, "KuGou");
+  qmlRegisterType<Lyric>("Lyric", 1, 0, "Lyric");
+  qmlRegisterType<Decode>("Decode", 1, 0, "Decode");
 
   QQmlApplicationEngine engine;
   const QUrl url(QStringLiteral("qrc:/qml/MainWindow.qml"));

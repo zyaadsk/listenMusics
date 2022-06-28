@@ -1,3 +1,5 @@
 import QtQuick
 
-Item {}
+import Decode 1.0
+
+Canvas {}

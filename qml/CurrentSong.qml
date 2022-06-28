@@ -15,13 +15,11 @@ Rectangle {
     radius: 4
     RowLayout {
         id: smallRowlayout
-        //        anchors.bottom: parent.bottom
-        //        anchors.left: parent.left
-        //        anchors.margins: 10
-        //        anchors.bottomMargin: 40
         spacing: 5
 
         Rectangle {
+            id: lyric
+
             height: 60
             width: 60
             Image {
@@ -33,7 +31,14 @@ Rectangle {
                 source: "/resource/background/1.png"
                 TapHandler {
                     onTapped: {
-
+                        var lyricCounts = lyricDialog.counts++
+                        if (lyricCounts % 2 == 0) {
+                            lyricDialog.visible = true
+                            songsearchdialog.visible = false
+                        } else {
+                            lyricDialog.visible = false
+                            songsearchdialog.visible = true
+                        }
                     }
                 }
             }
@@ -41,8 +46,6 @@ Rectangle {
 
         ColumnLayout {
             id: smallColumnlayout
-            //            height: 60
-            //            width: 100
             spacing: 4
 
             Rectangle {

@@ -54,8 +54,16 @@ Rectangle {
     MediaPlayer {
         id: mediaplayer
         audioOutput: AudioOutput {}
+
         onPositionChanged: {
-            mediaplayer.play()
+            var currentTimeIndex=lyricDialog.currentLine(position)
+            lyricDialog.lyricView.currentIndex = currentTimeIndex
+            desktopLyricDialog.desktopTextNow=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex).lyric
+            if(lyricDialog.lyricView.currentIndex != lyricDialog.cLyric.time.length-1){
+                desktopLyricDialog.desktopTextNext=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex+1).lyric
+            }else{
+                desktopLyricDialog.desktopTextNext=" "
+            }
         }
     }
 }

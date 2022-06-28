@@ -6,11 +6,9 @@ import QtQuick.Controls 2.5 as QQC
 
 Item {
     property alias fileOpenDialog: fileopen
-    property int state:0
 
     function openFileDialog() {
         fileopen.open()
-        //fileopen.accepted()
     }
     function openaboutDialog() {
         about.open()
@@ -23,12 +21,7 @@ Item {
                            StandardPaths.DocumentsLocation)
         fileMode: FileDialog.OpenFiles
         nameFilters: ["Music files (*.mp3 *.ogg)"] //设置文件类型
-        onAccepted: {
-            leftmargin.listmodels.clear()
-            leftmargin.setFilesModel(fileOpenDialog.selectedFiles)
-            //SongList.getmodel()
-            //state=1
-        }
+        onAccepted: leftmargin.setFilesModel(fileOpenDialog.selectedFiles)
     }
 
     QQC.Dialog {
