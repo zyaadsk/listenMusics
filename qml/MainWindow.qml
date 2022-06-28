@@ -21,10 +21,6 @@ ApplicationWindow {
         }
     }
 
-    Spectrogram {
-        id: spectrogram
-    }
-
     Content {
         id: content
     }
