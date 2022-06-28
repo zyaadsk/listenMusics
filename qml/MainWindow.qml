@@ -2,7 +2,6 @@ import QtQuick 2.0
 import QtQuick.Controls
 import QtQuick.Window
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
 
 ApplicationWindow {
     id: appWindow
@@ -70,51 +69,8 @@ ApplicationWindow {
         id: currentsong
     }
 
-    Rectangle {
-        property alias image: image
-        id: rect_round
-        width: 300
-        height: 300
-        radius: 150
-        anchors.top: searchBar.bottom
-        anchors.right: parent.right
-        anchors.topMargin: 60
-        anchors.rightMargin: 100
-        color: "black"
-        Image {
-            id: image
-            smooth: true
-            visible: false
-            anchors.fill: parent
-            sourceSize: Qt.size(parent.size, parent.size)
-            antialiasing: true
-            NumberAnimation {
-                running: rect_round
-                loops: Animation.Infinite
-                target: rect_round
-                from: 0
-                to: 360
-                property: "rotation"
-                duration: 10000
-            }
-        }
-        Rectangle {
-            id: mask
-            color: "black"
-            anchors.fill: parent
-            radius: 150
-            visible: false
-            antialiasing: true
-            smooth: true
-        }
-
-        OpacityMask {
-            id: mask_iamge
-            anchors.fill: mask
-            source: image
-            maskSource: mask
-            visible: true
-            antialiasing: true
-        }
+    RectRound {
+        id: rectround
+        visible: false
     }
 }

@@ -1,5 +1,5 @@
 <RCC>
-    <qresource lang="qml" prefix="/"/>
+    <qresource prefix="/" lang="qml"/>
     <qresource prefix="/">
         <file>resource/image/伴奏.png</file>
         <file>resource/image/帮助.png</file>
@@ -80,5 +80,6 @@
         <file>qml/Spectrogram.qml</file>
         <file>qml/PlayList.qml</file>
         <file>qml/DesktopLyric.qml</file>
+        <file>qml/RectRound.qml</file>
     </qresource>
 </RCC>

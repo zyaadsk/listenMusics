@@ -34,9 +34,11 @@ Rectangle {
                         var lyricCounts = lyricDialog.counts++
                         if (lyricCounts % 2 == 0) {
                             lyricDialog.visible = true
+                            rectround.visible = true
                             songsearchdialog.visible = false
                         } else {
                             lyricDialog.visible = false
+                            rectround.visible = false
                             songsearchdialog.visible = true
                         }
                     }
@@ -57,6 +59,7 @@ Rectangle {
                     id: songtx
                     font.bold: true
                     text: qsTr("听点儿音乐")
+                    elide: Text.ElideRight
                 }
             }
 
@@ -68,6 +71,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
                     id: singertx
                     text: qsTr("听点儿你的音乐")
+                    elide: Text.ElideRight
                 }
             }
         }

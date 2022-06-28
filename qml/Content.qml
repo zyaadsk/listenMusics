@@ -7,8 +7,6 @@ Rectangle {
     anchors.fill: parent
     property alias mediaplay: mediaplayer
 
-
-
     function playMedia() {
         //播放功能
         mediaplayer.play()
@@ -53,16 +51,21 @@ Rectangle {
     }
     MediaPlayer {
         id: mediaplayer
-        audioOutput: AudioOutput {}
+        audioOutput: AudioOutput {
+            id: audiooutput
+            volume: playsong.value / 100
+        }
 
         onPositionChanged: {
-            var currentTimeIndex=lyricDialog.currentLine(position)
+            var currentTimeIndex = lyricDialog.currentLine(position)
             lyricDialog.lyricView.currentIndex = currentTimeIndex
-            desktopLyricDialog.desktopTextNow=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex).lyric
-            if(lyricDialog.lyricView.currentIndex != lyricDialog.cLyric.time.length-1){
-                desktopLyricDialog.desktopTextNext=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex+1).lyric
-            }else{
-                desktopLyricDialog.desktopTextNext=" "
+            desktopLyricDialog.desktopTextNow = lyricDialog.lyricModel.get(
+                        lyricDialog.lyricView.currentIndex).lyric
+            if (lyricDialog.lyricView.currentIndex != lyricDialog.cLyric.time.length - 1) {
+                desktopLyricDialog.desktopTextNext = lyricDialog.lyricModel.get(
+                            lyricDialog.lyricView.currentIndex + 1).lyric
+            } else {
+                desktopLyricDialog.desktopTextNext = " "
             }
         }
     }

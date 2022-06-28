@@ -4,12 +4,21 @@ import QtQuick.Layouts
 
 RowLayout {
     property alias slider: slider
-
+    property alias value: slidersound.value
     id: playRowlayout
 
     anchors.bottom: parent.bottom
     anchors.horizontalCenter: parent.horizontalCenter
     anchors.rightMargin: 20
+
+    Slider {
+        id: slidersound
+        enabled: true
+        from: 0
+        to: 100
+        value: 20
+    }
+
     Rectangle {
         id: desktop
         width: 20
@@ -47,6 +56,7 @@ RowLayout {
         id: slider
         from: 0
         to: content.mediaplay.duration
+        value: content.mediaplay.position
         onMoved: {
             content.mediaplay.setPosition(slider.value)
         }
