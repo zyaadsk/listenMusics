@@ -161,6 +161,10 @@ Rectangle {
             //            console.log(lyrics)
             lyricDialog.cLyric.divideLyrics()
             lyricDialog.getL()
+            nowplaylist.nowmode.append({"media":content.mediaplay.source,
+                                       "name":currentsong.songtx.text})
+            playsong.tataltimes=content.getTime(content.mediaplay.duration)
+
         }
     }
 }

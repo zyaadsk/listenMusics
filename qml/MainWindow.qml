@@ -32,6 +32,10 @@ ApplicationWindow {
 
     PlayList {
         id: playlist
+<<<<<<< HEAD
+=======
+
+>>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
     }
 
 

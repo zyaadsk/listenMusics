@@ -35,9 +35,11 @@ Rectangle {
                         if (lyricCounts % 2 == 0) {
                             lyricDialog.visible = true
                             songsearchdialog.visible = false
+                            playlist.visible=false
                         } else {
                             lyricDialog.visible = false
                             songsearchdialog.visible = true
+                            playlist.visible=true
                         }
                     }
                 }

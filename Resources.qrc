@@ -80,6 +80,10 @@
         <file>qml/Spectrogram.qml</file>
         <file>qml/PlayList.qml</file>
         <file>qml/DesktopLyric.qml</file>
+<<<<<<< HEAD
+=======
+        <file>qml/RectRound.qml</file>
+>>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
         <file>qml/NowPlayList.qml</file>
     </qresource>
 </RCC>

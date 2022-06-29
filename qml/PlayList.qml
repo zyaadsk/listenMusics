@@ -15,6 +15,7 @@ Item {
     property int mod:1
     function setFilesModel() {
         for (var j in arguments[0]) {
+            content.mediaplay.source=arguments[0][j]
            listmodels.append({
                           "medias": arguments[0][j],
                                  "names":arguments[0][j].toString(),
@@ -32,11 +33,19 @@ Item {
             console.log("当前所在视图:"+publicview.currentIndex)
         }
     }
+<<<<<<< HEAD
     Rectangle{
         anchors.fill: parent
         border.color: "red"
         //color: "gray"
         //opacity: 0.3
+=======
+    Rectangle{//最外层
+        anchors.fill: parent
+        border.color: "red"
+       color: Qt.rgba(192/255,192/255,192/255,0.2)
+        //opacity: 0.08
+>>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
 
     ListModel{
         id:listmode
@@ -45,6 +54,7 @@ Item {
 
     ListModel{
         id:listmodels
+
     }
 
     TextField{
@@ -72,18 +82,37 @@ Item {
             mod++
             listmode.append({"nomber":mod})
             listname.visible=true
+<<<<<<< HEAD
+=======
+            listname.y=listname.height
+            listname.x=listname.width
+>>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
         }
     }
     ListView{
         id:publicview
+<<<<<<< HEAD
         height: 500
+=======
+        height: 350
+>>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
         width: playlistqml.width-2
         model:listmode
+        ScrollBar.vertical:ScrollBar{
+            width: 10
+            policy: ScrollBar.AsNeeded
+        }
+
         delegate:
             SongList
         {
+<<<<<<< HEAD
             height: 100
             width: parent.width
+=======
+            height: 288
+            width:playlist.width
+>>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
         }
 
 }
