@@ -6,9 +6,6 @@ import QtMultimedia
 Rectangle {
     anchors.fill: parent
     property alias mediaplay: mediaplayer
-    property var url
-
-
 
     //时间转化
     function getTime(playTime) {
@@ -81,23 +78,24 @@ Rectangle {
     }
     MediaPlayer {
         id: mediaplayer
-        audioOutput: AudioOutput {}
+        audioOutput: AudioOutput {
+            id: audiooutput
+            volume: playsong.value / 100
+        }
 
         onPositionChanged: {
-<<<<<<< HEAD
-            var currentTimeIndex=lyricDialog.currentLine(position)
-=======
             playsong.nowtimes=getTime(mediaplay.position)
             playsong.tataltimes=content.getTime(content.mediaplay.duration)
 
             var currentTimeIndex = lyricDialog.currentLine(position)
->>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
             lyricDialog.lyricView.currentIndex = currentTimeIndex
-            //desktopLyricDialog.desktopTextNow=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex).lyric
-            if(lyricDialog.lyricView.currentIndex != lyricDialog.cLyric.time.length-1){
-                desktopLyricDialog.desktopTextNext=lyricDialog.lyricModel.get(lyricDialog.lyricView.currentIndex+1).lyric
-            }else{
-                desktopLyricDialog.desktopTextNext=" "
+            desktopLyricDialog.desktopTextNow = lyricDialog.lyricModel.get(
+                        lyricDialog.lyricView.currentIndex).lyric
+            if (lyricDialog.lyricView.currentIndex != lyricDialog.cLyric.time.length - 1) {
+                desktopLyricDialog.desktopTextNext = lyricDialog.lyricModel.get(
+                            lyricDialog.lyricView.currentIndex + 1).lyric
+            } else {
+                desktopLyricDialog.desktopTextNext = " "
             }
         }
     }

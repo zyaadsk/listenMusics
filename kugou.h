@@ -34,7 +34,7 @@ class KuGou : public QObject {
   QList<double> m_duration;
   QString m_image;
   QString m_lyrics;
-  QString m_url;//变化
+  QString m_url;
   QString m_song;
   QString m_singer;
 

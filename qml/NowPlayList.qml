@@ -2,10 +2,7 @@ import QtQuick
 import QtQuick.Controls
 Item {
     property alias nowmode: nowmode
-<<<<<<< HEAD
-=======
     property alias nowlistview:thislistview
->>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
 
     ListModel{
         id:nowmode
@@ -42,10 +39,7 @@ Item {
                 width: 100
                 Text {
                     anchors.fill: parent
-<<<<<<< HEAD
-=======
                     elide: Text.ElideRight
->>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
                     text: index+"   "+name
                     TapHandler {
                         //双击播放
@@ -54,10 +48,7 @@ Item {
                             thislistview.currentIndex = index
                             content.mediaplay.source = media //将资源导入md
                             content.mediaplay.play() //md进行播放的实现
-<<<<<<< HEAD
-=======
                             playsong.tataltimes=content.getTime(content.mediaplay.duration)
->>>>>>> b3c40b0 (完成了歌单的删除创建和添加及播放列表，和上一首下一首的切换及歌曲信息的保存，)
                         }
                     }
                     TapHandler {
