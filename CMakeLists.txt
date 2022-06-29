@@ -34,6 +34,7 @@ find_package(Qt6 REQUIRED COMPONENTS Qml)
 find_package(Qt6 REQUIRED COMPONENTS Network)
 find_package(Qt6 REQUIRED COMPONENTS Multimedia)
 find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Sql)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -68,6 +69,7 @@ target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Qml)
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Network)
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Multimedia)
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Sql)
 target_link_libraries(ListenToSomeMusic PRIVATE avutil avcodec avfilter avdevice avformat postproc swresample)
 
 set_target_properties(ListenToSomeMusic PROPERTIES

@@ -4,32 +4,30 @@ import QtQuick.Controls as QQC
 import QtMultimedia
 
 Rectangle {
-    anchors.fill: parent
     property alias mediaplay: mediaplayer
 
     //时间转化
     function getTime(playTime) {
-        var m,s;
-        var time;
-        playTime=(playTime-playTime%1000)/1000;
-        m=(playTime-playTime%60)/60
-        s=playTime-m*60
-        if(m>=0&m<10) {
-            if(s>=0&s<10) {
-                time="0"+m+":0"+s;
+        var m, s
+        var time
+        playTime = (playTime - playTime % 1000) / 1000
+        m = (playTime - playTime % 60) / 60
+        s = playTime - m * 60
+        if (m >= 0 & m < 10) {
+            if (s >= 0 & s < 10) {
+                time = "0" + m + ":0" + s
             } else {
-                time="0"+m+":"+s;
+                time = "0" + m + ":" + s
             }
         } else {
-            if(s>=0&s<10) {
-                time=m+":0"+s;
+            if (s >= 0 & s < 10) {
+                time = m + ":0" + s
             } else {
-                time=m+":"+s;
+                time = m + ":" + s
             }
         }
-        return time;
+        return time
     }
-
     function playMedia() {
         //播放功能
         mediaplayer.play()
@@ -44,17 +42,14 @@ Rectangle {
     }
     function nextMedia() {
         //下一首
-        for (var i = 0; i <=nowplaylist.nowmode.count; i++) {
+        for (var i = 0; i <= nowplaylist.nowmode.count; i++) {
             if (mediaplayer.source == nowplaylist.nowmode.get(i).media) {
                 mediaplayer.stop()
                 i = i + 1
-                if (i > nowplaylist.nowmode.count)
-                {
+                if (i > nowplaylist.nowmode.count) {
                     mediaplayer.source = nowplaylist.nowmode.get(0).media
-                }
-                else
-                {
-                    mediaplayer.source =nowplaylist.nowmode.get(i).media
+                } else {
+                    mediaplayer.source = nowplaylist.nowmode.get(i).media
                 }
                 mediaplayer.play()
                 break
@@ -63,12 +58,13 @@ Rectangle {
     }
     function lastMedia() {
         //上一首
-        for (var j = 0; j <=nowplaylist.nowmode.count; j++) {
-            if (mediaplayer.source == nowplaylist.nowmode.get(j)) {
+        for (var j = 0; j <= nowplaylist.nowmode.count; j++) {
+            if (mediaplayer.source == nowplaylist.nowmode.get(j).media) {
                 mediaplayer.stop()
                 j = j - 1
-                if (i < 0)
-                    mediaplayer.source = nowplaylist.nowmode.get(nowplaylist.nowmode.count-1).media
+                if (j < 0)
+                    mediaplayer.source = nowplaylist.nowmode.get(
+                                nowplaylist.nowmode.count - 1).media
                 else
                     mediaplayer.source = nowplaylist.nowmode.get(j).media
                 mediaplayer.play()
@@ -84,8 +80,8 @@ Rectangle {
         }
 
         onPositionChanged: {
-            playsong.nowtimes=getTime(mediaplay.position)
-            playsong.tataltimes=content.getTime(content.mediaplay.duration)
+            playsong.nowtimes = getTime(mediaplay.position)
+            playsong.tataltimes = content.getTime(content.mediaplay.duration)
 
             var currentTimeIndex = lyricDialog.currentLine(position)
             lyricDialog.lyricView.currentIndex = currentTimeIndex

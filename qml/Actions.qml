@@ -72,4 +72,5 @@ Item {
             desktopLyricDialog.visible = false
         }
     }
+
 }

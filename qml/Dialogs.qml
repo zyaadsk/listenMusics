@@ -25,6 +25,7 @@ Item {
             playlist.setFilesModel(fileOpenDialog.selectedFiles)
             playlist.state=0
             playlist.settime.running=true
+
         }
     }
 

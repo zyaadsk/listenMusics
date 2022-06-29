@@ -3,12 +3,12 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Rectangle {
+    color: Qt.rgba(255, 255, 255, 0.5)
     property alias img: img
     property alias songtx: songtx
     property alias singertx: singertx
     anchors.bottom: parent.bottom
     anchors.left: parent.left
-    anchors.rightMargin: 10
     anchors.bottomMargin: 40
     width: 160
     height: 70
@@ -20,6 +20,7 @@ Rectangle {
         Rectangle {
             id: lyric
 
+            color: Qt.rgba(255, 255, 255, 0)
             height: 60
             width: 60
             Image {
@@ -36,12 +37,12 @@ Rectangle {
                             lyricDialog.visible = true
                             rectround.visible = true
                             songsearchdialog.visible = false
-                            playlist.visible=false
+                            playlist.visible = false
                         } else {
                             lyricDialog.visible = false
                             rectround.visible = false
                             songsearchdialog.visible = true
-                            playlist.visible=true
+                            playlist.visible = true
                         }
                     }
                 }
@@ -53,11 +54,12 @@ Rectangle {
             spacing: 4
 
             Rectangle {
+                color: Qt.rgba(255, 255, 255, 0)
                 height: 33
                 width: 70
-                clip: true
+                //                clip: true
                 Text {
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.fill: parent
                     id: songtx
                     font.bold: true
                     text: qsTr("听点儿音乐")
@@ -66,11 +68,11 @@ Rectangle {
             }
 
             Rectangle {
+                color: Qt.rgba(255, 255, 255, 0)
                 height: 33
                 width: 90
-                clip: true
                 Text {
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.fill: parent
                     id: singertx
                     text: qsTr("听点儿你的音乐")
                     elide: Text.ElideRight

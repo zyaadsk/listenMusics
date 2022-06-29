@@ -4,6 +4,7 @@ import QtQuick.Controls
 import KuGou 1.0
 
 Rectangle {
+    color: Qt.rgba(255, 255, 255, 0.5)
     property alias kugou: kugou
     id: songsearchdialog
     width: parent.width / 5 * 4
@@ -23,7 +24,8 @@ Rectangle {
             Layout.fillWidth: true
             Layout.leftMargin: 50
             Layout.bottomMargin: 20
-            Layout.alignment: Qt.AlignTop
+            //            Layout.alignment: Qt.AlignTop
+            anchors.top: parent.top
             anchors.topMargin: 10
 
             Text {
@@ -74,11 +76,14 @@ Rectangle {
     Component {
         id: searchdelegate
         Rectangle {
+            id: rectsong
             radius: 4
             width: searchlistview.width - 50
             height: 40
             focus: true
-            color: ListView.isCurrentItem ? "lightgrey" : "white"
+            color: ListView.isCurrentItem ? Qt.rgba(255, 255, 255,
+                                                    0.5) : Qt.rgba(255,
+                                                                   255, 255, 0)
             clip: true
             RowLayout {
                 id: sarchLayout
@@ -115,6 +120,17 @@ Rectangle {
                     kugou.onclickPlay(index)
                 }
             }
+            TapHandler {
+                acceptedButtons: Qt.RightButton
+                onTapped: {
+                    searchlistview.currentIndex = index
+                    rightRect.x = eventPoint.scenePosition.x - (songsearchdialog.width / 4 - 15)
+                    rightRect.y = eventPoint.scenePosition.y
+                            - (searchlistRowlayout.height + searchBar.height + 15)
+                    rightRect.visible = true
+                    rightRect.index = index
+                }
+            }
         }
     }
 
@@ -145,12 +161,11 @@ Rectangle {
         }
         onUrlChanged: {
             content.mediaplay.source = url
-            console.log(url)
             content.mediaplay.play()
             actions.playAction.icon.source = "/resource/image/暂停.png"
             currentsong.img.source = image
-            currentsong.songtx.text = song
-            currentsong.singertx.text = singer
+            currentsong.songtx.text = song//name
+            currentsong.singertx.text = singer//歌手
             rectround.image.source = image
 
             lyricDialog.counts = 0
@@ -158,10 +173,114 @@ Rectangle {
             lyricDialog.cLyric.setLyric(lyrics)
             lyricDialog.cLyric.divideLyrics()
             lyricDialog.getL()
-            nowplaylist.nowmode.append({"media":content.mediaplay.source,
-                                       "name":currentsong.songtx.text})
-            playsong.tataltimes=content.getTime(content.mediaplay.duration)
+            nowplaylist.nowmode.append({
+                                           "media": content.mediaplay.source,
+                                           "name": currentsong.songtx.text,
+                                           "image":currentsong.img.source = image,
+                                           "songs":currentsong.songtx.text,
+                                           "singers":currentsong.singertx.text
+                                       })
+            playsong.tataltimes = content.getTime(content.mediaplay.duration)
+        }
+    }
 
+    Rectangle {
+        property var index
+        id: rightRect
+        height: 60
+        width: 150
+        visible: false
+        ColumnLayout {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            Rectangle {
+                height: 30
+                width: 150
+                id: rectPlay
+                RowLayout {
+                    spacing: 15
+                    Rectangle {
+                        width: 15
+                        height: 15
+                        Layout.leftMargin: 10
+                        Image {
+                            anchors.fill: parent
+                            source: "/resource/image/播放.png"
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                    Text {
+                        id: play
+                        text: qsTr("播放")
+                    }
+                    TapHandler {
+                        onTapped: {
+                            kugou.onclickPlay(rightRect.index)
+                            eventPoint.accepted = true
+                            gesturePolicy: TapHandler.ReleaseWithinBounds
+                        }
+                    }
+                }
+                HoverHandler {
+                    onHoveredChanged: {
+                        if (hovered) {
+                            rectPlay.color = "gray"
+                        }
+                        if (!hovered) {
+                            rectPlay.color = "white"
+                        }
+                    }
+                }
+            }
+            Rectangle {
+                id: rectAdd
+                height: 30
+                width: 150
+                RowLayout {
+                    spacing: 15
+                    Rectangle {
+                        width: 15
+                        height: 15
+                        Layout.leftMargin: 10
+                        Image {
+                            anchors.fill: parent
+                            source: "/resource/image/add.png"
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                    Text {
+                        id: add
+                        text: qsTr("添加到播放列表")
+                        TapHandler {
+                            onTapped: {
+
+                            }
+                        }
+                    }
+                }
+                HoverHandler {
+                    onHoveredChanged: {
+                        if (hovered) {
+                            rectAdd.color = "gray"
+                        }
+                        if (!hovered) {
+                            rectAdd.color = "white"
+                        }
+                    }
+                }
+            }
+        }
+
+        HoverHandler {
+            onHoveredChanged: {
+                if (hovered) {
+                    rightRect.visible = true
+                }
+                if (!hovered) {
+                    rightRect.visible = false
+                }
+            }
         }
     }
 }

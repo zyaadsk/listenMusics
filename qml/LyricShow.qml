@@ -36,6 +36,7 @@ Item {
     Component {
         id: lyricComponent
         Rectangle {
+            color: Qt.rgba(255, 255, 255, 0)
             id: componentItem
             anchors.right: parent.right
             anchors.rightMargin: 60
@@ -50,7 +51,7 @@ Item {
                 text: lyric
                 //设置当前歌词的样式
                 font.pixelSize: componentItem.ListView.isCurrentItem ? 25 : 18
-                color: componentItem.ListView.isCurrentItem ? "red" : "black"
+                color: componentItem.ListView.isCurrentItem ? "red" : "white"
                 horizontalAlignment: Text.AlignHCenter //水平居中
                 verticalAlignment: Text.AlignVCenter //垂直居中
                 elide: Text.ElideRight

@@ -9,7 +9,7 @@ RowLayout {
     anchors.top: parent.top
     anchors.right: parent.right
     anchors.rightMargin: 10
-    spacing: 20
+    spacing: -30
 
     TextField {
         id: inputField
@@ -19,7 +19,7 @@ RowLayout {
             implicitWidth: 200
             border.color: "gray"
         }
-        placeholderText: qsTr("搜一搜歌曲")
+        placeholderText: qsTr("张宇")
         Keys.onPressed: {
             if (event.key === Qt.Key_Return) {
                 songsearchdialog.visible = true
