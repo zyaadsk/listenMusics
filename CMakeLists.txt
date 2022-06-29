@@ -35,6 +35,7 @@ find_package(Qt6 REQUIRED COMPONENTS Network)
 find_package(Qt6 REQUIRED COMPONENTS Multimedia)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Sql)
+INCLUDE_DIRECTORIES("/usr/include/taglib")
 
 set(PROJECT_SOURCES
         main.cpp
@@ -45,6 +46,8 @@ set(PROJECT_SOURCES
         kugou.cpp
         lyric.h
         lyric.cpp
+        localsong.h
+        localsong.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -71,6 +74,7 @@ target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Multimedi
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Core)
 target_link_libraries(ListenToSomeMusic PRIVATE Qt${QT_VERSION_MAJOR}::Sql)
 target_link_libraries(ListenToSomeMusic PRIVATE avutil avcodec avfilter avdevice avformat postproc swresample)
+target_link_libraries(ListenToSomeMusic PRIVATE tag)
 
 set_target_properties(ListenToSomeMusic PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
