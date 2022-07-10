@@ -1,3 +1,9 @@
+/* ListenToSomeMusic Player
+ * zhangyu:2020051615216
+ * hulu:2020051615204
+ * zahngyu:2020051615218
+*/
+
 #include "localsong.h"
 
 #include <fstream>
@@ -25,21 +31,22 @@ LocalSong::LocalSong(QObject *parent)
 void LocalSong::songInfo(QString url)
 {
     m_Tags.clear();
-    qDebug()<< "url:" << url;
+//    qDebug()<< "url:" << url;
 
     QString locaUrl = url.remove(url.left(7));
     QByteArray ba=locaUrl.toUtf8();
     const char *ch=ba.data();
 
-    qDebug() << "ch"<<ch;
+//    qDebug() << "ch"<<ch;
 
     TagLib::MPEG::File *localFile = new TagLib::MPEG::File(ch);
 
     if(localFile->isOpen()){
         m_Tags["歌名"] = localFile->tag()->title().toCString();
         m_Tags["艺术家"] = localFile->tag()->artist().toCString();
+        m_Tags["专辑"] = localFile->tag()->album().toCString();
 
-        qDebug() << localFile->tag()->title().toCString() <<" " << localFile->tag()->artist().toCString();
+//        qDebug() << localFile->tag()->title().toCString() <<" " << localFile->tag()->artist().toCString();
 
     }
 

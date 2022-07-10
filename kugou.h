@@ -1,3 +1,9 @@
+/* ListenToSomeMusic Player
+ * zhangyu:2020051615216
+ * hulu:2020051615204
+ * zahngyu:2020051615218
+*/
+
 #ifndef KUGOU_H
 #define KUGOU_H
 #include <QNetworkAccessManager>

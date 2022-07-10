@@ -1,3 +1,9 @@
+/* ListenToSomeMusic Player
+ * zhangyu:2020051615216
+ * hulu:2020051615204
+ * zahngyu:2020051615218
+*/
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -14,7 +20,7 @@ ApplicationWindow {
     id: root
     width: 800
     height: 150
-    flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint //是窗口无边框 最顶层
+    flags: Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint //将窗口无边框 最顶层
     color: Qt.rgba(0, 0, 0, 0)
 
     //无边框窗口的移动
@@ -68,6 +74,7 @@ ApplicationWindow {
             }
         }
 
+        //当前歌词
         Text {
             id: desktoptextNow
             text: ""
@@ -77,6 +84,7 @@ ApplicationWindow {
             color: "red"
         }
 
+        //下一句歌词
         Text {
             id: desktoptextNext
             text: ""

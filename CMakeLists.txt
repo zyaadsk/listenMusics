@@ -40,8 +40,6 @@ INCLUDE_DIRECTORIES("/usr/include/taglib")
 set(PROJECT_SOURCES
         main.cpp
         Resources.qrc
-        mainwindow.h
-        mainwindow.cpp
         kugou.h
         kugou.cpp
         lyric.h

@@ -1,4 +1,10 @@
-import QtQuick 2.0
+/* ListenToSomeMusic Player
+ * zhangyu:2020051615216
+ * hulu:2020051615204
+ * zahngyu:2020051615218
+*/
+
+import QtQuick
 import QtQuick.Controls
 import QtQuick.Window
 import QtQuick.Layouts
@@ -120,5 +126,8 @@ ApplicationWindow {
     RectRound {
         id: rectround
         visible: false
+    }
+    SongInformation{
+        id:songInformation
     }
 }

@@ -1,3 +1,9 @@
+/* ListenToSomeMusic Player
+ * zhangyu:2020051615216
+ * hulu:2020051615204
+ * zahngyu:2020051615218
+*/
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -31,10 +37,11 @@ Rectangle {
                 playlist.listmodels.append({
                                                "medias": content.mediaplay.source,
                                                "names": currentsong.songtx.text,
-                                               "images": currentsong.img.source,
+                                               "images": currentsong.img.source.toString(),
                                                "songs": currentsong.songtx.text,
-                                               "singers": currentsong.singertx.text
-                                               //"lyrics":songsearchdialog.kugou.lyrics
+                                               "singers": currentsong.singertx.text,
+                                               "lyrics":songsearchdialog.kugou.lyrics,
+                                               "froms":"1"
                                            })
                 playlist.state = 1
             }

@@ -41,7 +41,6 @@
         <file>resource/image/download.png</file>
         <file>resource/image/exit.png</file>
         <file>resource/image/last.png</file>
-        <file>resource/image/logo.png</file>
         <file>resource/image/new.png</file>
         <file>resource/image/next.png</file>
         <file>resource/image/open.png</file>
@@ -65,7 +64,6 @@
         <file>qml/SongSearchDialog.qml</file>
         <file>qml/LyricShow.qml</file>
         <file>qml/SongList.qml</file>
-        <file>qml/MusicPlayer.qml</file>
         <file>qml/SearchBar.qml</file>
         <file>qml/CurrentSong.qml</file>
         <file>qml/PlaySong.qml</file>
@@ -81,5 +79,6 @@
         <file>qml/DesktopLyric.qml</file>
         <file>qml/RectRound.qml</file>
         <file>qml/NowPlayList.qml</file>
+        <file>qml/SongInformation.qml</file>
     </qresource>
 </RCC>

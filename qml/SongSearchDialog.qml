@@ -1,3 +1,9 @@
+/* ListenToSomeMusic Player
+ * zhangyu:2020051615216
+ * hulu:2020051615204
+ * zahngyu:2020051615218
+*/
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
@@ -167,7 +173,6 @@ Rectangle {
             currentsong.songtx.text = song//name
             currentsong.singertx.text = singer//歌手
             rectround.image.source = image
-
             lyricDialog.counts = 0
             desktopLyricDialog.counts = 0
             lyricDialog.cLyric.setLyric(lyrics)
@@ -176,9 +181,11 @@ Rectangle {
             nowplaylist.nowmode.append({
                                            "media": content.mediaplay.source,
                                            "name": currentsong.songtx.text,
-                                           "image":currentsong.img.source = image,
-                                           "songs":currentsong.songtx.text,
-                                           "singers":currentsong.singertx.text
+                                           "image":currentsong.img.source,
+                                           "song":currentsong.songtx.text,
+                                           "singer":currentsong.singertx.text,
+                                           "lyric":lyrics,
+                                           "from":1
                                        })
             playsong.tataltimes = content.getTime(content.mediaplay.duration)
         }

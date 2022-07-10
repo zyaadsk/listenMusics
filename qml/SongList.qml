@@ -1,11 +1,15 @@
+/* ListenToSomeMusic Player
+ * zhangyu:2020051615216
+ * hulu:2020051615204
+ * zahngyu:2020051615218
+*/
+
 import QtQuick
 import QtQuick.Controls
-
+import QtMultimedia
 Rectangle {
     id: songlists
     color: Qt.rgba(192 / 255, 192 / 255, 192 / 255, 0.2)
-    //width: playlist.width
-    //anchors.left: parent.left
     property alias songmode: songmode
     property alias listview: listview
     property int liststat: 1
@@ -22,8 +26,9 @@ Rectangle {
                                 "name": playlist.listmodels.get(j).names,
                                 "image": playlist.listmodels.get(j).images,
                                 "song": playlist.listmodels.get(j).songs,
-                                "singer": playlist.listmodels.get(j).singers
-                                //"lyric":playlist.listmodels.get(j).layrics
+                                "singer": playlist.listmodels.get(j).singers,
+                                "lyric":playlist.listmodels.get(j).lyrics,
+                                "from":playlist.listmodels.get(j).froms,
                             })
         }
     }
@@ -32,15 +37,32 @@ Rectangle {
         border.color: "black"
         color: Qt.rgba(192 / 255, 192 / 255, 192 / 255, 0.2)
 
+        Rectangle{
+            id:delets
+            height: 42
+            width: 90
+            visible: false
+            Column{
         Button {
             id: deletmusic
             height: 20
-            width: 60
-            visible: false
+            width: 90
             text: qsTr("删除歌曲")
             onClicked: {
                 songmode.remove(remove)
-                deletmusic.visible = false
+                delets.visible = false
+            }
+        }
+        Button {
+            id: musicdate
+            height: 20
+            width: 90
+            text: qsTr("查看歌曲信息")
+            onClicked: {
+                songInformation.visible = true
+                delets.visible = false
+            }
+        }
             }
         }
         Button {
@@ -82,16 +104,11 @@ Rectangle {
                                     songlists.height = headertext.height
                                     addmusic.visible = false
                                     listview.visible = false
-                                    //listview.visible=false
-                                    //                   addmusic.height=0
-                                    //getmodel()
                                     liststat = 0
                                 } else if (liststat == 0) {
                                     songlists.height = 300
                                     addmusic.visible = true
                                     listview.visible = true
-                                    //listview.visible=true
-                                    //                       addmusic.height=10
                                     liststat = 1
                                 }
                             }
@@ -119,18 +136,13 @@ Rectangle {
                 Rectangle {
                     id: listitem
                     color: Qt.rgba(192 / 255, 192 / 255, 192 / 255, 0.09)
-                    //anchors.fill: parent
                     height: topitem.height - headers.height
                     width: topitem.width
                     ListView {
                         id: listview
                         footer: addmusic
-
-                        //header:headers
                         width: 100
                         height: 300
-
-                        //anchors.fill: parent
                         remove: Transition {
                             ParallelAnimation {
                                 NumberAnimation {
@@ -161,46 +173,68 @@ Rectangle {
                                                                     1) : Qt.rgba(
                                                                     255,
                                                                     255, 255, 0)
-                                //color:ListView.isCurrentItem ? "black" : "red"
-                                //clip: true
                                 TapHandler {
-                                    //删除播放列表中的歌曲
+                                    //删除播放列表中的歌曲/查看歌曲信息
                                     acceptedButtons: Qt.RightButton
                                     onTapped: {
                                         remove = index
-                                        console.log("删除当前：" + index)
-                                        deletmusic.visible = true
-                                        deletmusic.z = 3
-                                        deletmusic.x = eventPoint.scenePosition.x
-                                        deletmusic.y = eventPoint.scenePosition.y
+                                        delets.visible = true
+                                        listview.currentIndex = index
+                                        songInformation.infoImage.source = ""
+                                        songInformation.infoImage.source = image
+                                        songInformation.infoTitle.text = song
+                                        songInformation.artist.text = singer
+//                                        songInformation.album.text = album
+                                        delets.z = 4
+                                        delets.x = eventPoint.scenePosition.x
+                                        delets.y = eventPoint.scenePosition.y
                                     }
                                 }
                                 TapHandler {
                                     //双击播放
                                     onDoubleTapped: {
-                                        content.mediaplay.stop() //将上一首歌曲结束
+                                        actions.playAction.icon.source = "/resource/image/暂停.png"
                                         listview.currentIndex = index
+                                        content.mediaplay.stop() //将上一首歌曲结束
                                         content.mediaplay.source = media
                                         currentsong.songtx.text = song
                                         currentsong.singertx.text = singer
-                                        //lyricDialog.cLyric.setLyric(lyric)
                                         currentsong.img.source = image
-                                        nowplaylist.nowmode.append({
-                                                                       "media": listview.currentIndex.meida,
-                                                                       "name": listview.currentIndex.name
-                                                                   })
-                                        console.log("当前的音乐长：" + content.mediaplay.duration)
-                                        content.mediaplay.play() //md进行播放的实现
-                                        //                                    playsong.tataltimes=content.getTime(content.mediaplay.duration)
-                                        //                                   console.log("当前的音乐长："+content.mediaplay.duration)
+                                        rectround.image.source=image
+                                        content.mediaplay.stop() //将上一首歌曲结束
+                                        //本地音乐歌词解析
+                                        if(from==0)
+                                        {
+                                        lyricDialog.cLyric.getLocalUrl(media)
+                                        lyricDialog.cLyric.divideLocalLyric()
+                                        lyricDialog.getL()
                                     }
+                                        //网络歌词解析
+                                        if(from==1)
+                                        {
+                                            lyricDialog.cLyric.setLyric(lyric)
+                                            lyricDialog.cLyric.divideLyrics()
+                                            lyricDialog.getL()
+
+                                        }
+                                        nowplaylist.nowmode.append({
+                                                                       "media": media,
+                                                                       "name": name,
+                                                                       "image":image,
+                                                                       "song": song,
+                                                                       "singer":singer,
+                                                                       "lyric":lyric,
+
+                                                                   })
+                                        content.mediaplay.play() //md进行播放的实现
+                                    }
+
                                 }
                                 Text {
                                     id: tx
-                                    //color: rect.ListView.isCurrentItem ? "black" : "red"
                                     anchors.fill: parent
                                     elide: Text.ElideRight
-                                    text: index + "    " + name //文件路径名
+                                    text: index+1 + "    " + name //文件路径名
                                 }
                             }
                         }
@@ -229,12 +263,9 @@ Rectangle {
                                 songlists.endtime.running = true
                                 songlists.endtime.repeat = true
                             }
-
-                            //listmodels.clear()
                         }
                     }
                 }
-                //}
             }
         }
 

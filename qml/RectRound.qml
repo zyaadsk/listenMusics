@@ -1,3 +1,9 @@
+/* ListenToSomeMusic Player
+ * zhangyu:2020051615216
+ * hulu:2020051615204
+ * zahngyu:2020051615218
+*/
+
 import QtQuick
 import Qt5Compat.GraphicalEffects
 
@@ -12,13 +18,13 @@ Rectangle {
     anchors.left: parent.left
     anchors.topMargin: 80
     anchors.leftMargin: 60
-    color: "black"
     Image {
         id: image
         smooth: true
         visible: false
         anchors.fill: parent
         sourceSize: Qt.size(parent.size, parent.size)
+        source: "/resource/background/1.png"
         antialiasing: true
         NumberAnimation {
             id: animation
